@@ -6,9 +6,9 @@
 ```csharp
 kwotahxd@github
 -------------------------------
-OS: Arch Linux, NixOS Linux, Windows 11
-SHELL: bash 
-CODE EDITOR: neovim
+OS: Arch/Gentoo/Win11
+SHELL: bash
+CODE EDITOR: nvim (=nano)
 LOCATION: Izhevsk, RU
 SPEAKING: Russian, English
 LANGUAGES: Python, Rust  
