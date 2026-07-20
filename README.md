@@ -6,7 +6,7 @@
 ```csharp
 kwotahxd@github
 -------------------------------
-OS: Arch\Gentoo\Win 11
+OS: Arch\Gentoo\Win11
 SHELL: bash 
 CODE EDITOR: nvim(=nano)
 LOCATION: Izhevsk, RU
