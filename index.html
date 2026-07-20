@@ -1,0 +1,74 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Steam miniprofile</title>
+  <style>
+    body { font-family: system-ui, -apple-system, "Segoe UI", Roboto, Arial; margin:12px; }
+    .card { border-radius:8px; box-shadow:0 1px 6px rgba(0,0,0,.12); padding:12px; max-width:360px; }
+    .avatar { width:64px; height:64px; border-radius:8px; object-fit:cover; }
+  </style>
+</head>
+<body>
+  <div class="card" id="profile">
+    <div id="loading">Loading...</div>
+  </div>
+
+  <script>
+    const params = new URLSearchParams(location.search);
+    const accountId = params.get('accountId') || '';
+
+    const profileEl = document.getElementById('profile');
+    const loadingEl = document.getElementById('loading');
+
+    if (!accountId) {
+      profileEl.innerHTML = '<div style="color:#c00">No accountId provided. Use ?accountId=YOUR_STEAM_ID</div>';
+      notifyParent();
+    } else {
+      // Minimal safe rendering: link to Steam profile and show the ID.
+      // If you want richer data (avatar, name), you'll need a server-side proxy or Steam Web API.
+      profileEl.innerHTML = `
+        <div style="display:flex; gap:12px; align-items:center;">
+          <img src="https://via.placeholder.com/64?text=S" alt="avatar" class="avatar" id="avatar">
+          <div>
+            <div><strong>Steam ID:</strong> ${escapeHtml(accountId)}</div>
+            <div style="margin-top:6px">
+              <a href="https://steamcommunity.com/profiles/${encodeURIComponent(accountId)}" target="_blank" rel="noopener">Open on Steam</a>
+            </div>
+          </div>
+        </div>
+      `;
+
+      // Optional: attempt a public fetch for more info (may be blocked by CORS).
+      // Example: Steam XML (may or may not be available/cors-enabled)
+      fetch(`https://steamcommunity.com/profiles/${accountId}/?xml=1`)
+        .then(r => r.text())
+        .then(txt => {
+          // very small example: extract <avatarIcon> from xml if present
+          const m = txt.match(/<avatarIcon>(.*?)<\/avatarIcon>/);
+          if (m) document.getElementById('avatar').src = m[1];
+        })
+        .catch(_ => {
+          // ignore fetch errors (CORS / blocked); provide fallback
+        })
+        .finally(() => notifyParent());
+    }
+
+    // Send height to parent so iframe can auto-resize (parent must listen for this message).
+    function notifyParent() {
+      const payload = { type: 'miniprofile-height', height: document.body.scrollHeight };
+      if (window.parent && window.parent !== window) {
+        // Use '*' here; for production you should restrict origin.
+        window.parent.postMessage(payload, '*');
+      }
+    }
+
+    // call on load and on resize
+    window.addEventListener('load', notifyParent);
+    window.addEventListener('resize', notifyParent);
+
+    function escapeHtml(s) { return String(s).replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c])); }
+  </script>
+</body>
+</html>
