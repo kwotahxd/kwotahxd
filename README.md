@@ -18,7 +18,7 @@ SKILLS: None =(
 -------
 ## Links to me :3
 
-<img align="right" src="https://media.discordapp.net/attachments/1491787062213349439/1528162521716883527/755p2r5.png?ex=6a5e9d41&is=6a5d4bc1&hm=893cc17e0c691de10d2521cd15617e82de2efa13a3d2f679b0690258ab26d87d&=&format=webp&quality=lossless&width=962&height=770" alt="linux.jpeg" width="250" />
+<img align="right" src="/docs/linux.jpg" alt="linux.jpg" width="250" />
 
 #### Telegram: [@a173r_kw074h](https://t.me/a173r_kw074h)
 #### Discord: [@kwotahahah](https://discord.com/users/1035509777318559804)
