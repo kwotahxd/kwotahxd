@@ -18,7 +18,7 @@ SKILLS: None =(
 -------
 ## Links to me :3
 
-<img align="right" src="/docs/linux.jpg" alt="Urara Shiratori holding Linux From Scratch" width="250" />
+<img align="right" src="docs/linux.jpg" alt="Urara Shiratori holding Linux From Scratch" width="250" />
 
 #### Telegram: [@a173r_kw074h](https://t.me/a173r_kw074h)
 #### Discord: [@kwotahahah](https://discord.com/users/1035509777318559804)
